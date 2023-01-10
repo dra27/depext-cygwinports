@@ -18,10 +18,10 @@ wrappers: $(WRAPPERS)
 
 SOURCES= config_file.mli config_file.ml run.mli run.ml cygwin.mli cygwin.ml
 
-PACKS = str.cmxa unix.cmxa
+PACKS = str,unix,camlp-streams
 
 cygwin-install.exe: $(SOURCES)
-	ocamlopt $(OCAMLFLAGS) $(PACKS) $(SOURCES) -o $@
+	ocamlfind ocamlopt $(OCAMLFLAGS) -package $(PACKS) -linkpkg $(SOURCES) -o $@
 
 pkg-config.exe: symlink.c config.h
 	$(CC) -s symlink.c -o pkg-config.exe
