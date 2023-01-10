@@ -5,7 +5,7 @@ set -eu
 cygwin_root="$(cygpath -m /)"
 cygwin_arch="$(uname -m)"
 
-mingw_arch="$(ocamlc -config 2>/dev/null | awk '/^system/ {print $2}')"
+mingw_arch="$(ocamlc -config 2>/dev/null | tr -d '\r' | awk '/^system/ {print $2}')"
 
 if [ "$mingw_arch" != "mingw64" ] && [ "$mingw_arch" != "mingw" ] ; then
     echo "unsupported mingw_arch: '$mingw_arch'" >&2

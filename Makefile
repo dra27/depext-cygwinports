@@ -3,8 +3,8 @@
 PREFIX?= /usr/local
 OCAMLFLAGS= -g #-bin-annot -safe-string -w A-4-39
 
-OSTYPE:=$(shell ocamlc -config | awk '/^os_type/ { print $$2}')
-CC:= $(shell ocamlc -config | awk '/^bytecomp_c_compiler/ {for(i=2;i<=NF;i++) printf "%s " ,$$i}')
+OSTYPE:=$(shell ocamlc -config | tr -d '\r' | awk '/^os_type/ { print $$2}')
+CC:= $(shell ocamlc -config | tr -d '\r' | awk '/^bytecomp_c_compiler/ {for(i=2;i<=NF;i++) printf "%s " ,$$i}')
 
 ifeq ($(OSTYPE),$(filter $(OSTYPE),Win32 Cygwin))
 all: cygwin-install.exe pkg-config.exe
